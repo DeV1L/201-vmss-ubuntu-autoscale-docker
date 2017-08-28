@@ -45,19 +45,7 @@
       "metadata": {
         "description": "Admin password on all VMs."
       }
-    },
-      "_artifactsLocation": {
-          "type": "string",
-          "metadata": {
-              "description": "Auto-generated container in staging storage account to receive post-build staging folder upload"
-          }
-      },
-      "_artifactsLocationSasToken": {
-          "type": "securestring",
-          "metadata": {
-              "description": "Auto-generated token to access _artifactsLocation"
-          }
-      }
+    }
   },
   "variables": {
     "namingInfix": "[toLower(substring(concat(parameters('vmssName'), uniqueString(resourceGroup().id)), 0, 9))]",
@@ -89,8 +77,6 @@
     "networkApiVersion": "2017-04-01",
     "storageApiVersion": "2015-06-15",
     "insightsApiVersion": "2015-04-01",
-      "autostartScriptFileName": "autostart.sh",
-      "autostartScriptFilePath": "[concat('201-vmss-ubuntu-autoscale-docker/CustomScripts/', variables('autostartScriptFileName'))]"
   },
   "resources": [
     {
@@ -235,14 +221,14 @@
                         "properties": {
                             "publisher": "Microsoft.OSTCExtensions",
                             "type": "CustomScriptForLinux",
-                            "typeHandlerVersion": "1.4",
+                            "typeHandlerVersion": "1.5",
                             "autoUpgradeMinorVersion": true,
-                            "settings": {
-                                "fileUris": [
-                                    "[concat(parameters('_artifactsLocation'), '/', variables('autostartScriptFilePath'), parameters('_artifactsLocationSasToken'))]"
-                                ],
-                                "commandToExecute": "[concat('sh ', variables('autostartScriptFileName'))]"
-                            }
+                          "settings": {
+                            "fileUris": [
+                              [ "https://raw.githubusercontent.com/DeV1L/201-vmss-ubuntu-autoscale-docker/master/CustomScripts/autostart.sh" ]
+                            ],
+                            "commandToExecute": "sh autostart.sh"
+                          }
                         }
                     }
                 ]
