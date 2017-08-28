@@ -216,21 +216,27 @@
           },
             "extensionProfile": {
                 "extensions": [
-                    {
-                        "name": "autostart",
-                        "properties": {
-                            "publisher": "Microsoft.OSTCExtensions",
-                            "type": "CustomScriptForLinux",
-                            "typeHandlerVersion": "1.5",
-                            "autoUpgradeMinorVersion": true,
-                          "settings": {
-                            "fileUris": [
-                              [ "https://raw.githubusercontent.com/DeV1L/201-vmss-ubuntu-autoscale-docker/master/CustomScripts/autostart.sh" ]
-                            ],
-                            "commandToExecute": "sh autostart.sh"
-                          }
-                        }
+                  {
+                    "name": "autostart",
+                    "type": "extensions",
+                    "location": "[resourceGroup().location]",
+                    "apiVersion": "2015-06-15",
+                    "tags": {
+                      "displayName": "autostart"
+                    },
+                    "properties": {
+                      "publisher": "Microsoft.Azure.Extensions",
+                      "type": "CustomScript",
+                      "typeHandlerVersion": "2.0",
+                      "autoUpgradeMinorVersion": true,
+                      "settings": {
+                        "fileUris": [
+                          "https://raw.githubusercontent.com/DeV1L/201-vmss-ubuntu-autoscale-docker/master/CustomScripts/autostart.sh"
+                        ],
+                        "commandToExecute": "sh autostart.sh"
+                      }
                     }
+                  }
                 ]
             }
         }
