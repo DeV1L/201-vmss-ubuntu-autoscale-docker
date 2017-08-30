@@ -322,7 +322,7 @@
                   "direction": "Increase",
                   "type": "ChangeCount",
                   "value": "1",
-                  "cooldown": "PT1M"
+                  "cooldown": "PT5M"
                 }
               },
               {
