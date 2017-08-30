@@ -34,6 +34,18 @@
       "metadata": {
         "description": "Admin password on all VMs."
       }
+    },
+    "crUsername": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Username for Container Registry."
+      }
+    },
+    "crPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Password for Container Registry."
+      }
     }
   },
   "variables": {
@@ -145,7 +157,7 @@
               "protocol": "tcp",
               "frontendPortRangeStart": "9000",
               "frontendPortRangeEnd": "9120",
-              "backendPort": "9000"
+              "backendPort": "80"
             }
           }
         ]
@@ -229,7 +241,7 @@
                     "fileUris": [
                       "https://raw.githubusercontent.com/DeV1L/201-vmss-ubuntu-autoscale-docker/master/CustomScripts/autostart.sh"
                     ],
-                    "commandToExecute": "bash autostart.sh"
+                    "commandToExecute": "[concat('bash autostart.sh ',variables('crUsername'), ' ', parameters('crPassword'))]"
                   }
                 }
               }
