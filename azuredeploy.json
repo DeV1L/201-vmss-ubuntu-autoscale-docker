@@ -135,6 +135,41 @@
             "name": "[variables('bePoolName')]"
           }
         ],
+        "loadBalancingRules": [
+          {
+            "name": "Pool_80",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "frontendIPConfiguration": {
+                "id": "[variables('frontEndIPConfigID')]"
+              },
+              "frontendPort": 80,
+              "backendPort": 80,
+              "enableFloatingIP": false,
+              "idleTimeoutInMinutes": 4,
+              "protocol": "Tcp",
+              "loadDistribution": "Default",
+              "backendAddressPool": {
+                "id": "[concat(variables('frontEndIPConfigID'),'_1')]"
+              },
+              "probe": {
+                "id": "[concat(variables('frontEndIPConfigID'),'_2')]"
+              }
+            }
+          }
+        ],
+        "probes": [
+          {
+            "name": "ProbeRule_80",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "protocol": "Tcp",
+              "port": 80,
+              "intervalInSeconds": 5,
+              "numberOfProbes": 2
+            }
+          }
+        ],
         "inboundNatPools": [
           {
             "name": "[variables('natPoolName')]",
@@ -142,7 +177,7 @@
               "frontendIPConfiguration": {
                 "id": "[variables('frontEndIPConfigID')]"
               },
-              "protocol": "tcp",
+              "protocol": "Tcp",
               "frontendPortRangeStart": "[variables('natStartPort')]",
               "frontendPortRangeEnd": "[variables('natEndPort')]",
               "backendPort": "[variables('natBackendPort')]"
@@ -154,10 +189,10 @@
               "frontendIPConfiguration": {
                 "id": "[variables('frontEndIPConfigID')]"
               },
-              "protocol": "tcp",
-              "frontendPortRangeStart": "9000",
-              "frontendPortRangeEnd": "9120",
-              "backendPort": "443"
+              "protocol": "Tcp",
+              "frontendPortRangeStart": 9000,
+              "frontendPortRangeEnd": 9120,
+              "backendPort": 443
             }
           }
         ]
