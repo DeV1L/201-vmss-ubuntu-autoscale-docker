@@ -219,7 +219,7 @@
           "extensionProfile": {
             "extensions": [
               {
-                "name": "lapextension",
+                "name": "autostart",
                 "properties": {
                   "publisher": "Microsoft.Azure.Extensions",
                   "type": "CustomScript",
@@ -227,7 +227,6 @@
                   "autoUpgradeMinorVersion": true,
                   "settings": {
                     "fileUris": [
-                      "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vmss-bottle-autoscale/installserver.sh",
                       "https://raw.githubusercontent.com/DeV1L/201-vmss-ubuntu-autoscale-docker/master/CustomScripts/autostart.sh"
                     ],
                     "commandToExecute": "bash autostart.sh"
