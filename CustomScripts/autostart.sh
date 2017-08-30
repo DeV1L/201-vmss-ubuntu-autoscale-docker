@@ -5,6 +5,6 @@ sudo apt-get update -y
 sudo apt-get install -y docker-ce htop
 
 sudo docker login arkadiumcom.azurecr.io -u $1 -p $2
-sudo docker run --name arkadiumcom arkadiumcom.azurecr.io/arkadiumcom/content-apache-ssl:latest
+sudo docker run -d --name arkadiumcom -p 80:80 -p 443:443 arkadiumcom.azurecr.io/arkadiumcom/content-apache-ssl:latest
 
 echo test > /tmp/test
