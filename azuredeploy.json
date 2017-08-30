@@ -241,7 +241,7 @@
                     "fileUris": [
                       "https://raw.githubusercontent.com/DeV1L/201-vmss-ubuntu-autoscale-docker/master/CustomScripts/autostart.sh"
                     ],
-                    "commandToExecute": "[concat('bash autostart.sh ',variables('crUsername'), ' ', parameters('crPassword'))]"
+                    "commandToExecute": "[concat('bash autostart.sh ',parameters('crUsername'), ' ', parameters('crPassword'))]"
                   }
                 }
               }
